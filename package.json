@@ -32,6 +32,7 @@
     "test": "npx hardhat test",
     "deploy": "npx hardhat run scripts/deploy-and-config.ts",
     "commit": "npx hardhat run scripts/commit.ts",
-    "register": "npx hardhat run scripts/register.ts"
+    "register": "npx hardhat run scripts/register.ts",
+    "recover-eth": "npx hardhat run scripts/recover-eth.ts"
   }
 }
