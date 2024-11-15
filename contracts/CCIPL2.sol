@@ -18,6 +18,7 @@ contract CCIPL2 is CCIPReceiver, OwnerIsCreator {
   error FailedToWithdrawEth(address owner, address target, uint256 value); // Used when the withdrawal of Ether fails.
   error DestinationChainNotAllowlisted(uint64 destinationChainSelector); // Used when the destination chain has not been allowlisted by the contract owner.
   error InvalidReceiverAddress(); // Used when the receiver address is 0.
+  error CannotSetReverseRecord(); // Cannot relay this feature from L2
 
   // Event emitted when a message is sent to another chain.
   event MessageSent(
@@ -109,6 +110,7 @@ contract CCIPL2 is CCIPReceiver, OwnerIsCreator {
     bytes32 _secret,
     address _resolver,
     bytes[] calldata _data,
+    bool _reverseRecord,
     uint16 _fuses
   ) external payable {
     if (
@@ -124,6 +126,9 @@ contract CCIPL2 is CCIPReceiver, OwnerIsCreator {
     // when registering the name, the same ETH amount with a 10% fee is release to the user address on L1.
     if (msg.value < 0.004 ether)
       revert NotEnoughBalance(msg.value, 0.004 ether);
+
+    // Revert if the reverse record is set to true. Only the owner as the msg.sender can claim and set reverse records.
+    if (_reverseRecord) revert CannotSetReverseRecord();
 
     // Encode the register data to be sent to the L1 contract
     bytes memory data = abi.encode(

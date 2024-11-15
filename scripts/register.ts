@@ -29,6 +29,7 @@ async function main() {
     "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef", // secret
     "0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63", // resolver
     [], // data
+    false, // reverseRecord. Must be false since primary name can only be settled to msg.sender
     0, // fuses
     { value: ethers.utils.parseEther("0.04") },
   );
