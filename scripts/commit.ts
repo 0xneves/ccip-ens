@@ -61,12 +61,12 @@ async function main() {
   const providerARB = new ethers.providers.JsonRpcProvider(baseSepoliaRPC);
   const deployerL2 = new ethers.Wallet(deployerKey, providerARB);
 
-  const L2BaseSepolia = "0xB0F30A5F70708c83c9d92A434DABe8372bE9Aa8c";
+  const L2BaseSepolia = "0xc6F6F7e4F6Fe174db888BC0F361cfFDe9e5bbE6b";
 
   const L2 = await ethers.getContractAt("CCIPL2", L2BaseSepolia, deployerL2);
 
   const commitment = makeCommitment(
-    "nameisnottakenforsure", // name
+    "nam3nottak3nforsur3", // name
     deployerL2.address, // owner
     31556952, // duration (e.g., 1 year in seconds)
     "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef", // secret
